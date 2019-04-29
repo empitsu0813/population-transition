@@ -1,10 +1,11 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import prefectures from './store/prefectures'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {}
+  modules: {
+    prefectures: prefectures
+  }
 });
