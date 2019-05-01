@@ -18,7 +18,6 @@ const actions = {
         headers: { "X-API-KEY": process.env.VUE_APP_API_KEY }
       })
       .then(response => {
-        console.log(response);
         prefectures = response.data.result;
       });
 
@@ -27,6 +26,7 @@ const actions = {
 };
 
 export default {
+  namespaced: true,
   state,
   mutations,
   actions
