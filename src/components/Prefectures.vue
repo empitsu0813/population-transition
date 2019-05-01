@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div>{{prefectures}}</div>
     <ul>
       <li
-        v-for="prefecture in prefectures.prefectures"
+        v-for="prefecture in prefectures"
         :key="prefecture.prefCode"
       >
         <input
@@ -22,14 +21,21 @@ import { mapActions, mapState } from "vuex"
 export default {
   name: "prefectures",
   computed: {
-    ...mapState(["prefectures"])
+    ...mapState("prefectures", ["prefectures"])
   },
   mounted() {
-    this.$store.dispatch("setPrefectures");
+    this.$store.dispatch("prefectures/setPrefectures");
   },
   methods: {
-    check: function (e, prefectures) {
-      aa
+    ...mapActions("populationTransition", ["addPopulationTransition", "removePopulationTransition"]),
+    check: function (e, prefecture) {
+      if (e.target.checked) {
+        // add
+        this.addPopulationTransition(prefecture)
+      } else {
+        this.removePopulationTransition(prefecture)
+        // remove
+      }
     }
   }
 };

@@ -1,24 +1,42 @@
 <template>
   <div>
     <h1 class="title">title</h1>
-    <Prefectures></prefectures>
-    <div>ここにチャート</div>
+    <Prefectures></Prefectures>
     <Chart :options="chartOptions"></Chart>
   </div>
 </template>
 
 <script>
-import Prefectures from '@/components/Prefectures.vue'
-import { Chart } from 'highcharts-vue'
+import { mapState } from "vuex"
+import Prefectures from "@/components/Prefectures.vue";
+import { Chart } from "highcharts-vue";
 
 export default {
   name: "home",
-  data() {
-    return {
-      chartOptions: {
-        series: [{
-          data: [1,2,3] // sample data
-        }]
+  computed: {
+    ...mapState("populationTransition", ["populationTransition", "xLabels"]),
+    chartOptions() {
+      return {
+        xAxis: {
+          title: {
+            text: '年 (年)'
+          },
+          categories: this.xLabels
+        },
+        yAxis: {
+          title: {
+            text: '人口数 (人)'
+          },
+          plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+          }]
+        },
+        tooltip: {
+          valueSuffix: '人'
+        },
+        series: this.populationTransition
       }
     }
   },
