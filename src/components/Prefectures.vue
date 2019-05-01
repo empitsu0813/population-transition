@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <ul>
       <li
         v-for="prefecture in prefectures"
@@ -30,13 +30,42 @@ export default {
     ...mapActions("populationTransition", ["addPopulationTransition", "removePopulationTransition"]),
     check: function (e, prefecture) {
       if (e.target.checked) {
-        // add
-        this.addPopulationTransition(prefecture)
+        this.addPopulationTransition(prefecture);
       } else {
-        this.removePopulationTransition(prefecture)
-        // remove
+        this.removePopulationTransition(prefecture);
       }
     }
   }
 };
 </script>
+
+<style scoped>
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+li {
+  width: 80px;
+  margin: 5px;
+  padding: 3px;
+  line-height: 1;
+  flex-wrap: wrap;
+}
+
+input {
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+}
+</style>

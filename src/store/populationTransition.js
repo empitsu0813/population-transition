@@ -1,22 +1,27 @@
 import axios from "axios";
 
 const state = {
-  populationTransition: [],
+  populationTransitionList: [],
   xLabels: []
 };
 
 const mutations = {
   addPopulationTransition(state, populationTransition) {
-    state.populationTransition.push(populationTransition);
+    state.populationTransitionList.push(populationTransition);
   },
   setXLabels(state, xLabels) {
     state.xLabels = xLabels;
+  },
+  removePopulationTransition(state, prefName) {
+    const tmp = state.populationTransitionList.filter(
+      populationTransition => populationTransition.name !== prefName
+    );
+    state.populationTransitionList = tmp;
   }
 };
 
 const actions = {
   async addPopulationTransition({ commit }, prefecture) {
-    console.log(prefecture)
     await axios
       .get("https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear", {
           headers: { "X-API-KEY": process.env.VUE_APP_API_KEY },
@@ -34,7 +39,7 @@ const actions = {
       });
   },
   removePopulationTransition({ commit }, prefecture) {
-    console.log("remove");
+    commit("removePopulationTransition", prefecture.prefName);
   }
 };
 

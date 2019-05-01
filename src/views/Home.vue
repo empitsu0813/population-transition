@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">title</h1>
+    <div class="title">都道府県別の総人口推移</div>
     <Prefectures></Prefectures>
     <Chart :options="chartOptions"></Chart>
   </div>
@@ -14,9 +14,12 @@ import { Chart } from "highcharts-vue";
 export default {
   name: "home",
   computed: {
-    ...mapState("populationTransition", ["populationTransition", "xLabels"]),
+    ...mapState("populationTransition", ["populationTransitionList", "xLabels"]),
     chartOptions() {
       return {
+        title: {
+          text: null
+        },
         xAxis: {
           title: {
             text: '年 (年)'
@@ -25,18 +28,13 @@ export default {
         },
         yAxis: {
           title: {
-            text: '人口数 (人)'
-          },
-          plotLines: [{
-            value: 0,
-            width: 1,
-            color: '#808080'
-          }]
+            text: '総人口数 (人)'
+          }
         },
         tooltip: {
           valueSuffix: '人'
         },
-        series: this.populationTransition
+        series: this.populationTransitionList
       }
     }
   },
@@ -46,3 +44,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.title {
+  font-size: 24px;
+  font-weight: 600;
+}
+</style>
