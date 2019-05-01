@@ -23,10 +23,14 @@ const mutations = {
 const actions = {
   async addPopulationTransition({ commit }, prefecture) {
     await axios
-      .get("https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear", {
+      .get(
+        "https://opendata.resas-portal.go.jp/api/v1/population/" +
+          "composition/perYear",
+        {
           headers: { "X-API-KEY": process.env.VUE_APP_API_KEY },
           params: { prefCode: prefecture.prefCode }
-      })
+        }
+      )
       .then(response => {
         const data = response.data.result.data[0].data;
         const populationTransition = {

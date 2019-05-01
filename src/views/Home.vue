@@ -7,14 +7,17 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState } from "vuex";
 import Prefectures from "@/components/Prefectures.vue";
 import { Chart } from "highcharts-vue";
 
 export default {
   name: "home",
   computed: {
-    ...mapState("populationTransition", ["populationTransitionList", "xLabels"]),
+    ...mapState("populationTransition", [
+      "populationTransitionList",
+      "xLabels"
+    ]),
     chartOptions() {
       return {
         title: {
@@ -22,20 +25,20 @@ export default {
         },
         xAxis: {
           title: {
-            text: '年 (年)'
+            text: "年 (年)"
           },
           categories: this.xLabels
         },
         yAxis: {
           title: {
-            text: '総人口数 (人)'
+            text: "総人口数 (人)"
           }
         },
         tooltip: {
-          valueSuffix: '人'
+          valueSuffix: "人"
         },
         series: this.populationTransitionList
-      }
+      };
     }
   },
   components: {
